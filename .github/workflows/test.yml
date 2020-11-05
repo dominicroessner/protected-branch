@@ -16,16 +16,15 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.PROTECTED_PAT }}
       - name: echo GET
-        run: "echo required status checks: ${{ steps.get_required_status_checks.outputs.data }}"
-      # - run: "echo required status checks: ${{ fromJson(steps.get_required_status_checks.outputs.data) }}"
+        # run: "echo required status checks: ${{ steps.get_required_status_checks.outputs.data }}"
+        run: "echo required status checks: ${{ fromJson(steps.get_required_status_checks.outputs.data) }}"
       - uses: octokit/request-action@v2.x
         id: put_required_status_checks_off
         with:
           route: PUT /repos/:repository/branches/:branch/protection/required_status_checks/contexts
           repository: ${{ github.repository }}
           branch: main
-          contexts: |
-            []
+          contexts: []
         env:
           GITHUB_TOKEN: ${{ secrets.PROTECTED_PAT }}
       - name: echo OFF
