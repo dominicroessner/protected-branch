@@ -25,7 +25,7 @@ jobs:
           repository: ${{ github.repository }}
           branch: main
           contexts: |
-            - ""
+            -
         env:
           GITHUB_TOKEN: ${{ secrets.PROTECTED_PAT }}
       - name: echo OFF
