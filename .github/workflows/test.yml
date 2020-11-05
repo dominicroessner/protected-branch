@@ -15,8 +15,9 @@ jobs:
           branch: main
         env:
           GITHUB_TOKEN: ${{ secrets.PROTECTED_PAT }}
-      # - run: "echo required status checks: ${{ steps.get_required_status_checks.outputs.data }}"
-      - run: "echo required status checks: ${{ fromJson(steps.get_required_status_checks.outputs.data) }}"
+      - name: echo GET
+        run: "echo required status checks: ${{ steps.get_required_status_checks.outputs.data }}"
+      # - run: "echo required status checks: ${{ fromJson(steps.get_required_status_checks.outputs.data) }}"
       - uses: octokit/request-action@v2.x
         id: put_required_status_checks_off
         with:
@@ -27,7 +28,8 @@ jobs:
             []
         env:
           GITHUB_TOKEN: ${{ secrets.PROTECTED_PAT }}
-      - run: "echo required status checks: ${{ steps.put_required_status_checks_off.outputs.data }}"
+      - name: echo OFF
+        run: "echo required status checks: ${{ steps.put_required_status_checks_off.outputs.data }}"
       - name: commit
         run: |
           echo $(uuidgen) > test.txt
@@ -47,4 +49,5 @@ jobs:
             ${{ steps.get_required_status_checks.outputs.data }}
         env:
           GITHUB_TOKEN: ${{ secrets.PROTECTED_PAT }}
-      - run: "echo required status checks: ${{ steps.put_required_status_checks_on.outputs.data }}"
+      - name: echo ON
+        run: "echo required status checks: ${{ steps.put_required_status_checks_on.outputs.data }}"
