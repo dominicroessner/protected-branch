@@ -15,7 +15,7 @@ jobs:
           repository: ${{ github.repository }}
           branch: main
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PROTECTED_PAT }}
       - name: disable required status checks
         uses: octokit/request-action@v2.x
         id: put_required_status_checks_off
@@ -25,7 +25,7 @@ jobs:
           branch: main
           data: "[]"
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PROTECTED_PAT }}
       - name: commit
         run: |
           echo $(uuidgen) > test.txt
@@ -44,4 +44,4 @@ jobs:
           branch: main
           data: ${{ steps.get_required_status_checks.outputs.data }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PROTECTED_PAT }}
