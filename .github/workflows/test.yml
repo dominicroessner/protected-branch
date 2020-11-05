@@ -8,6 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: get required status checks
+        if: github.ref == 'refs/heads/master'
         uses: octokit/request-action@v2.x
         id: get_required_status_checks
         with:
@@ -17,6 +18,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.PROTECTED_PAT }}
       - name: disable required status checks
+        if: github.ref == 'refs/heads/master'
         uses: octokit/request-action@v2.x
         id: put_required_status_checks_off
         with:
@@ -35,7 +37,7 @@ jobs:
           git commit -m "Update test.txt"
           git push
       - name: re-enable required status checks
-        if: always()
+        if: github.ref == 'refs/heads/main' && always()
         uses: octokit/request-action@v2.x
         id: put_required_status_checks_on
         with:
