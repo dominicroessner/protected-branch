@@ -24,7 +24,7 @@ jobs:
           route: PUT /repos/:repository/branches/:branch/protection/required_status_checks/contexts
           repository: ${{ github.repository }}
           branch: main
-          contexts: |
+          data: |
             - test
         env:
           GITHUB_TOKEN: ${{ secrets.PROTECTED_PAT }}
