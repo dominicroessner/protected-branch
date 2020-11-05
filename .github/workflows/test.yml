@@ -40,12 +40,10 @@ jobs:
       - uses: octokit/request-action@v2.x
         id: put_required_status_checks_on
         with:
-          route: PUT /repos/:owner/:repo/branches/:branch/protection/required_status_checks/contexts
-          mediaType: |
-            previews:
-              - antiope
-          contexts: |
-            ${{ steps.get_required_status_checks.outputs.data }}
+          route: PUT /repos/:repository/branches/:branch/protection/required_status_checks/contexts
+          repository: ${{ github.repository }}
+          branch: main
+          data: ${{ steps.get_required_status_checks.outputs.data }}
         env:
           GITHUB_TOKEN: ${{ secrets.PROTECTED_PAT }}
       # - name: echo ON
