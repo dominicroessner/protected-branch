@@ -10,10 +10,8 @@ jobs:
       - uses: octokit/request-action@v2.x
         id: get_required_status_checks
         with:
-          route: GET /repos/:owner/:repo/branches/:branch/protection/required_status_checks/contexts
-          mediaType: |
-            previews:
-              - antiope
+          route: GET /repos/:repository/branches/:branch/protection/required_status_checks/contexts
+          repository: ${{ github.repository }}
         env:
           GITHUB_TOKEN: ${{ secrets.PROTECTED_PAT }}
       - run: "echo required status checks: ${{ steps.get_required_status_checks.outputs.data }}"
