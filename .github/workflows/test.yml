@@ -7,7 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: octokit/request-action@v2.x
+      - name: get required status checks
+        uses: octokit/request-action@v2.x
         id: get_required_status_checks
         with:
           route: GET /repos/:repository/branches/:branch/protection/required_status_checks/contexts
@@ -15,10 +16,8 @@ jobs:
           branch: main
         env:
           GITHUB_TOKEN: ${{ secrets.PROTECTED_PAT }}
-      # - name: echo GET
-      #   # run: "echo required status checks: ${{ steps.get_required_status_checks.outputs.data }}"
-      #   run: "echo required status checks: ${{ fromJson(steps.get_required_status_checks.outputs.data) }}"
-      - uses: octokit/request-action@v2.x
+      - name: disable required status checks
+        uses: octokit/request-action@v2.x
         id: put_required_status_checks_off
         with:
           route: PUT /repos/:repository/branches/:branch/protection/required_status_checks/contexts
@@ -35,7 +34,8 @@ jobs:
           git add test.txt
           git commit -m "Update test.txt"
           git push
-      - uses: octokit/request-action@v2.x
+      - name: re-enable required status checks
+        uses: octokit/request-action@v2.x
         id: put_required_status_checks_on
         with:
           route: PUT /repos/:repository/branches/:branch/protection/required_status_checks/contexts
