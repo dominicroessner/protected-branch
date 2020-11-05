@@ -49,5 +49,5 @@ jobs:
             ${{ steps.get_required_status_checks.outputs.data }}
         env:
           GITHUB_TOKEN: ${{ secrets.PROTECTED_PAT }}
-      - name: echo ON
-        # run: "echo required status checks: ${{ steps.put_required_status_checks_on.outputs.data }}"
+      # - name: echo ON
+      #   run: "echo required status checks: ${{ steps.put_required_status_checks_on.outputs.data }}"
