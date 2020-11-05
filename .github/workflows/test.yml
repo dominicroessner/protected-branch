@@ -35,6 +35,7 @@ jobs:
           git commit -m "Update test.txt"
           git push
       - name: re-enable required status checks
+        if: always()
         uses: octokit/request-action@v2.x
         id: put_required_status_checks_on
         with:
