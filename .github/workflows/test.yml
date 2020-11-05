@@ -20,10 +20,9 @@ jobs:
       - uses: octokit/request-action@v2.x
         id: put_required_status_checks_off
         with:
-          route: PUT /repos/:owner/:repo/branches/:branch/protection/required_status_checks/contexts
-          mediaType: |
-            previews:
-              - antiope
+          route: PUT /repos/:repository/branches/:branch/protection/required_status_checks/contexts
+          repository: ${{ github.repository }}
+          branch: main
           contexts: |
             []
         env:
