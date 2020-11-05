@@ -8,7 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: get required status checks
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/main'
         uses: octokit/request-action@v2.x
         id: get_required_status_checks
         with:
@@ -18,7 +18,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.PROTECTED_PAT }}
       - name: disable required status checks
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/main'
         uses: octokit/request-action@v2.x
         id: put_required_status_checks_off
         with:
