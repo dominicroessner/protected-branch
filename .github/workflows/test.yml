@@ -27,8 +27,6 @@ jobs:
           data: "[]"
         env:
           GITHUB_TOKEN: ${{ secrets.PROTECTED_PAT }}
-      # - name: echo OFF
-      #   run: "echo required status checks: ${{ steps.put_required_status_checks_off.outputs.data }}"
       - name: commit
         run: |
           echo $(uuidgen) > test.txt
@@ -46,5 +44,3 @@ jobs:
           data: ${{ steps.get_required_status_checks.outputs.data }}
         env:
           GITHUB_TOKEN: ${{ secrets.PROTECTED_PAT }}
-      # - name: echo ON
-      #   run: "echo required status checks: ${{ steps.put_required_status_checks_on.outputs.data }}"
